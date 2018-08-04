@@ -14,41 +14,41 @@ public class AvailabillityDao {
 	Connection con ;
 	Gson gson 				= new Gson();
 	ResposeResult response  = new ResposeResult(true, null);
-	
+
 
 	/** 
 	 - store
 	 * */
 	public ResposeResult store(Availabillity availabillity){
-		
+
 		try { 
-            con 					= DBConnection.connect();
-            PreparedStatement stmt 	= con.prepareStatement("insert into availabillities (consultant_id, sun, mon, tue, wed, thu, fri, sat) values (?,?,?,?,?,?,?,?)");
+			con 					= DBConnection.connect();
+			PreparedStatement stmt 	= con.prepareStatement("insert into availabillities (consultant_id, sun, mon, tue, wed, thu, fri, sat) values (?,?,?,?,?,?,?,?)");
 
-            stmt.setInt(1, availabillity.getConsultant_id());
-            stmt.setString(2, availabillity.getSun().toString());
-            stmt.setString(3, availabillity.getMon().toString());
-            stmt.setString(4, availabillity.getTue().toString());
-            stmt.setString(5, availabillity.getWed().toString());
-            stmt.setString(6, availabillity.getThu().toString());
-            stmt.setString(7, availabillity.getFri().toString());
-            stmt.setString(8, availabillity.getSat().toString());
-            
+			stmt.setInt(1, availabillity.getConsultant_id());
+			stmt.setString(2, availabillity.getSun().toString());
+			stmt.setString(3, availabillity.getMon().toString());
+			stmt.setString(4, availabillity.getTue().toString());
+			stmt.setString(5, availabillity.getWed().toString());
+			stmt.setString(6, availabillity.getThu().toString());
+			stmt.setString(7, availabillity.getFri().toString());
+			stmt.setString(8, availabillity.getSat().toString());
 
-            if (stmt.executeUpdate() > 0) {
-            	response.setIs_error(false);
+
+			if (stmt.executeUpdate() > 0) {
+				response.setIs_error(false);
 			}
-            
-            con.close();
 
-        } catch (Exception e) {
-            response.setResult(e.getMessage());
-        }
-		
-	      return response;
-	   }
-	
-	
+			con.close();
+
+		} catch (Exception e) {
+			response.setResult(e.getMessage());
+		}
+
+		return response;
+	}
+
+
 	/** 
 	 - List them all 
 	 * */

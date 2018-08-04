@@ -1,4 +1,5 @@
-package com.availabillity;
+package com.specialized;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -8,30 +9,30 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import com.utilities.ResposeResult;
+@Path("/specialities")
 
-@Path("/availabillities")
-public class AvailabillityService {
+public class SpecializedService {
 
-	AvailabillityDao availabillity_dao = new AvailabillityDao();
+	SpecializedDao specialized_dao = new SpecializedDao();
 	ResposeResult response;
 
 	@POST 
 	@Path("/store")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResposeResult createAvailabillity(Availabillity availabillity,
+	public ResposeResult createSpeciality(Specialized specialized,
 			@Context HttpServletResponse servletResponse){
 		
-		ResposeResult response  = availabillity_dao.store(availabillity);
+		ResposeResult response  = specialized_dao.store(specialized);
 		return response; 
 	}
 	
 	
 	@GET 
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResposeResult getAvailabillities()
+	public ResposeResult getSpecialities()
 	{
-		response  = availabillity_dao.getAllAvilabillities();
+		response  = specialized_dao.getAllSpecialities();
 		return response; 
 	}
 }
