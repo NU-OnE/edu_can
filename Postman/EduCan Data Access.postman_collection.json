@@ -1,0 +1,428 @@
+{
+	"info": {
+		"name": "EduCan Data Access",
+		"_postman_id": "7c440138-8ab5-0ee9-170c-4140c020463f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Student save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Nimal\",\n\t\"gender\":\"Male\",\n\t\"contact_no\":\"0714545845\",\n\t\"email\":\"thilina@et.lk\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/students/store",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"students",
+						"store"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Counsellor -store",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Nimal\",\n\t\"salute\":\"Mr\",\n\t\"contact_no\":\"014754745\",\n\t\"email\":\"sdasd@mail.com\",\n\t\"address\":\"Colombo 2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/counsellors/store",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"counsellors",
+						"store"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Counsellor - Get ALL",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Nimal\",\n\t\"salute\":\"Mr\",\n\t\"contact_no\":\"014754745\",\n\t\"email\":\"sdasd@mail.com\",\n\t\"address\":\"Colombo 2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/counsellors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"counsellors"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Students - Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Nimal\",\n\t\"gender\":\"Male\",\n\t\"contact_no\":\"0714545845\",\n\t\"email\":\"thilina@et.lk\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"students"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "User - save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Thilina Nuwan\",\n\t\"role\":\"Admin\",\n\t\"password\":\"0714545845\",\n\t\"email\":\"thilina@et.lk\",\n\t\"active\":1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/users/store",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"users",
+						"store"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "User - getAll",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Thilina Nuwan\",\n\t\"role\":\"Admin\",\n\t\"password\":\"0714545845\",\n\t\"email\":\"thilina@et.lk\",\n\t\"active\":1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"users"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Availabillities - save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"consultant_id\":2,\n\t\"sun\":\"2.00 Am - 5.00 Pm\",\n\t\"mon\":\"4.00 Pm - 7.00 Pm\",\n\t\"tue\":\"4.00 Am - 7.00 Pm\",\n\t\"wed\":\"12.00 Pm - 3.00 Pm\",\n\t\"thu\":\"3.00 Pm - 5.00 Pm\",\n\t\"fri\":\"12.00 Pm - 2.00 Pm\",\n\t\"sat\":\"10.00 Am - 5.00 Pm\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/availabillities/store",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"availabillities",
+						"store"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Availabillities - Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"consultant_id\":2,\n\t\"sun\":\"2.00 Am - 5.00 Pm\",\n\t\"mon\":\"4.00 Pm - 7.00 Pm\",\n\t\"tue\":\"4.00 Am - 7.00 Pm\",\n\t\"wed\":\"12.00 Pm - 3.00 Pm\",\n\t\"thu\":\"3.00 Pm - 5.00 Pm\",\n\t\"fri\":\"12.00 Pm - 2.00 Pm\",\n\t\"sat\":\"10.00 Am - 5.00 Pm\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/availabillities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"availabillities"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Specialities- Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"consultant_id\":2,\n\t\"sun\":\"2.00 Am - 5.00 Pm\",\n\t\"mon\":\"4.00 Pm - 7.00 Pm\",\n\t\"tue\":\"4.00 Am - 7.00 Pm\",\n\t\"wed\":\"12.00 Pm - 3.00 Pm\",\n\t\"thu\":\"3.00 Pm - 5.00 Pm\",\n\t\"fri\":\"12.00 Pm - 2.00 Pm\",\n\t\"sat\":\"10.00 Am - 5.00 Pm\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/specialities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"specialities"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Specialities- Store",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"consultant_id\":3,\n\t\"country\":\"Australia\",\n\t\"subject\":\"Enginearing\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/specialities/store",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"specialities",
+						"store"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Appointments- save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"consultant_id\":3,\n\t\"student_id\":1,\n\t\"user_id\":1,\n\t\"day\":\"Tuesday\",\n\t\"date\":\"2018-08-05\",\n\t\"time\":\"2.00 Pm\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/appointments/store",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"appointments",
+						"store"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Appointments- get all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"consultant_id\":2,\n\t\"student_id\":1,\n\t\"user_id\":1,\n\t\"day\":\"Sunday\",\n\t\"date\":\"2018-07-02\",\n\t\"time\":\"5.00 Pm\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/edu_can_db/rest/appointments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"edu_can_db",
+						"rest",
+						"appointments"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
