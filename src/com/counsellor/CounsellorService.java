@@ -37,4 +37,14 @@ public class CounsellorService {
 		response  = counsellor_dao.getAllCounsellors();
 		return response; 
 	}
+	
+	
+	@Path("/select")
+	@GET 
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResposeResult getCounsellorsAsOption()
+	{
+		response  = counsellor_dao.counsellorsAsOption();
+		return response; 
+	}
 }

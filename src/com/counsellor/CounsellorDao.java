@@ -4,16 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.utilities.DBConnection;
 import com.utilities.ResposeResult;
 
 public class CounsellorDao {
 
-	Gson gson 				= new Gson();
-	//DBConnection db 		=  DBConnection();
+	Gson gson 				= new GsonBuilder().disableHtmlEscaping().create();
 	ResposeResult response  = new ResposeResult(true, null);
 
 	/** 
@@ -76,6 +78,33 @@ public class CounsellorDao {
 
 		response.setIs_error(false);
 		response.setResult(gson.toJson(counsellorList));
+		return response;
+	}
+	
+	
+	/** 
+	 - All Counselors To HTML Select Box
+	 * */
+	public ResposeResult counsellorsAsOption() {
+		
+		String option				= "<option selected disabled> Please Select </option>";
+		try {
+
+			Connection con 			= DBConnection.connect();
+			PreparedStatement stmt 	= con.prepareStatement("select * from consultants");     
+			ResultSet result 		= stmt.executeQuery();
+
+			while (result.next()) {
+				option =  option+" <option value='"+String.valueOf(result.getInt(1))+"'> "+result.getString(3)+" </option> "; 
+			} 
+
+		} catch (Exception e) {
+			response.setIs_error(true);
+			response.setResult(e.getMessage()); 
+		}
+
+		response.setIs_error(false);
+		response.setResult(gson.toJson(option));
 		return response;
 	}
 }
