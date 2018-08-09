@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 
 import com.availabillity.Availabillity;
 import com.google.gson.Gson;
@@ -83,6 +85,46 @@ public class AppointmentDao {
 
 		response.setIs_error(false);
 		response.setResult(gson.toJson(appointmentList));
+		return response;
+	}
+	
+	
+	/** 
+	 - List Specific student appointment
+	 * */
+	public ResposeResult getStudentAppointment() {
+		ResultSet result = null;
+		Vector v = new Vector<>();
+		
+		try {
+
+			con 					= DBConnection.connect();;
+			PreparedStatement stmt 	= con.prepareStatement(
+					"select cons.salute, cons.name, ap.day, ap.date, ap.time, ap.created_at " + 
+					"from appointments ap " + 
+					"INNER JOIN students st ON st.id = ap.student_id " + 
+					"INNER JOIN consultants cons ON cons.id = ap.consultant_id");     
+			result 		= stmt.executeQuery();
+
+			while (result.next()) 
+			{
+				 HashMap<String,String> hm = new HashMap<String,String>();  
+				  hm.put("salute",result.getString(1));  
+				  hm.put("consultant",result.getString(2));  
+				  hm.put("day",result.getString(3));  
+				  hm.put("date",result.getString(4));
+				  hm.put("time",result.getString(5));  
+				  
+				  v.add(gson.toJson(hm));
+			} 
+
+		} catch (Exception e) {
+			response.setIs_error(true);
+			response.setResult(e.getMessage());
+		}
+
+		response.setIs_error(false);
+		response.setResult(v.toString());
 		return response;
 	}
 }

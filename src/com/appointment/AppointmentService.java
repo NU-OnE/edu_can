@@ -35,4 +35,14 @@ public class AppointmentService {
 		response  = appointment_dao.getAllAppointments();
 		return response; 
 	}
+	
+//	Get Student appointment
+	@GET
+	@Path("/student")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResposeResult studentAppointments()
+	{
+		response  = appointment_dao.getStudentAppointment();
+		return response; 
+	}
 }
