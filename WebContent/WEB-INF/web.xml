@@ -6,7 +6,16 @@
       <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class> 
       <init-param> 
          <param-name>jersey.config.server.provider.packages</param-name> 
-         <param-value>com.student;com.counsellor;com.user;com.availabillity;com.specialized;com.appointment;com.utilities</param-value> 
+         <param-value>
+         com.student;
+         com.counsellor;
+         com.user;
+         com.availabillity;
+         com.specialized;
+         com.appointment;
+         com.utilities;
+         com.token
+         </param-value> 
       </init-param> 
    </servlet> 
    <servlet-mapping> 
