@@ -85,7 +85,7 @@ public class UserDao {
 
 			ResultSet result = stmt.executeQuery();
 
-			while (result.next()) {
+			if (result.next()) {
 				new_user = new User(result.getInt(1), result.getString(2), result.getString(3), user.getPassword(),
 						result.getString(5), result.getInt(6));
 			}

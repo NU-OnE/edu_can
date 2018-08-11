@@ -15,26 +15,21 @@ public class TokenService {
 	TokenDao token_dao = new TokenDao();
 	ResposeResult response;
 
-	@POST 
+	@POST
 	@Path("/new")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	
-	public ResposeResult getNewToken(User user,
-			@Context HttpServletResponse servletResponse){
-		
-		return  token_dao.newToken(user);
+	public ResposeResult getNewToken(User user, @Context HttpServletResponse servletResponse) {
+
+		return token_dao.newToken(user);
 	}
-	
-	
-	@POST 
+
+	@POST
 	@Path("/validate")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	
-	public ResposeResult validateToken(Token token,
-			@Context HttpServletResponse servletResponse){
-		
-		return  response;
+	public ResposeResult validateToken(Token token, @Context HttpServletResponse servletResponse) {
+
+		return token_dao.validate(token);
 	}
 }

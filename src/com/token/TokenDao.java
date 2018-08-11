@@ -2,6 +2,7 @@ package com.token;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
@@ -54,15 +55,65 @@ public class TokenDao {
 		UserDao user_dao = new UserDao();
 		User new_user = user_dao.getUserByEmail(user);
 
-		if(new_user == null) {
+		if (new_user == null) {
 			response.setResult("User not found");
 			return response;
 		}
-		
+
 		String uuid = UUID.randomUUID().toString();
 		Token token = new Token(0, new_user.getId(), uuid.replace("-", ""), "2018-12-12", null);
-		
+
+		deleteAll(new_user.getId());
 		return store(token);
 	}
 
+	/**
+	 * - Validate Token
+	 */
+	public ResposeResult validate(Token token) {
+		User user = null;
+		try {
+
+			con = DBConnection.connect();
+			PreparedStatement stmt = con.prepareStatement(
+					"SELECT u.*, api.expire_at FROM api_keys api INNER JOIN users u on u.id = api.user_id WHERE token = ?");
+
+			stmt.setString(1, token.getToken());
+			ResultSet result = stmt.executeQuery();
+
+			if (result.next()) {
+				user = new User(result.getInt(1), result.getString(2), result.getString(3), result.getString(5),
+						result.getString(4), result.getInt(6));
+
+				response.setIs_error(false);
+				response.setResult(gson.toJson(user));
+
+			} else {
+				response.setResult("Invalid Token");
+			}
+
+		} catch (Exception e) {
+			response.setResult(e.getMessage());
+		}
+
+		return response;
+	}
+
+	/**
+	 * - Delete existing tokens
+	 */
+	public void deleteAll(int user_id) {
+
+		try {
+			con = DBConnection.connect();
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM api_keys WHERE user_id = ?");
+
+			stmt.setInt(1, user_id);
+			stmt.executeUpdate();
+			con.close();
+
+		} catch (Exception e) {
+
+		}
+	}
 }
