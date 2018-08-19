@@ -61,7 +61,7 @@ public class TokenDao {
 		}
 
 		String uuid = UUID.randomUUID().toString();
-		Token token = new Token(0, new_user.getId(), uuid.replace("-", ""), "2018-12-12", null);
+		Token token = new Token(0, new_user.getId(), uuid.replace("-", ""), new_user.getName() , new_user.getRole() ,"2018-12-12", null);
 
 		deleteAll(new_user.getId());
 		return store(token);
