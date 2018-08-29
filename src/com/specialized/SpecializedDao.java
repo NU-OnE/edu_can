@@ -3,8 +3,10 @@ package com.specialized;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+
+import java.util.Vector;
+
 import com.google.gson.Gson;
 import com.utilities.DBConnection;
 import com.utilities.ResposeResult;
@@ -47,17 +49,37 @@ public class SpecializedDao {
 	 - List them all 
 	 * */
 	public ResposeResult getAllSpecialities() {
-		List<Specialized> specializedList = new ArrayList<Specialized>();
+
+		Vector<String> vector = new Vector<>();
+		
 		try {
 
 			con 					= DBConnection.connect();;
-			PreparedStatement stmt 	= con.prepareStatement("select * from specialized");     
+			PreparedStatement stmt 	= con.prepareStatement(
+					"SELECT con.salute, con.name, sp.country, sp.subject, sp.id as sp_id, av.* " + 
+					"FROM specialized sp " + 
+					"INNER JOIN consultants con on con.id = sp.`consultant_id` " + 
+					"INNER JOIN availabillities av on av.consultant_id = sp.`consultant_id`");     
 			ResultSet result 		= stmt.executeQuery();
 
 			while (result.next()) 
 			{
-				Specialized specialized = new Specialized(result.getInt(1), result.getInt(2), result.getString(3), result.getString(4));
-				specializedList.add(specialized);
+				HashMap<String,String> map = new HashMap<>();
+				
+				map.put("id", result.getString("sp_id"));
+				map.put("salute", result.getString("salute"));
+				map.put("name", result.getString("name"));
+				map.put("country", result.getString("country"));
+				map.put("subject", result.getString("subject"));
+				map.put("sun", result.getString("sun"));
+				map.put("mon", result.getString("mon"));
+				map.put("tue", result.getString("tue"));
+				map.put("wed", result.getString("wed"));
+				map.put("thu", result.getString("thu"));
+				map.put("fri", result.getString("fri"));
+				map.put("sat", result.getString("sat"));
+				
+				vector.add(gson.toJson(map));
 			} 
 
 		} catch (Exception e) {
@@ -66,7 +88,7 @@ public class SpecializedDao {
 		}
 
 		response.setIs_error(false);
-		response.setResult(gson.toJson(specializedList));
+		response.setResult(gson.toJson(vector));
 		return response;
 	}
 }

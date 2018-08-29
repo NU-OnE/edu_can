@@ -57,25 +57,30 @@ public class AppointmentDao {
 	 - List them all 
 	 * */
 	public ResposeResult getAllAppointments() {
-		List<Appointment> appointmentList = new ArrayList<Appointment>();
+		Vector v = new Vector<>();
 		try {
 
 			con 					= DBConnection.connect();;
-			PreparedStatement stmt 	= con.prepareStatement("select * from appointments");     
+			PreparedStatement stmt 	= con.prepareStatement(
+					"select cons.salute, cons.name, ap.day, ap.date, ap.time, ap.created_at, spe.country, spe.subject " + 
+					"from appointments ap " + 
+					"INNER JOIN students st ON st.id = ap.student_id " + 
+					"INNER JOIN consultants cons ON cons.id = ap.consultant_id "+
+					"INNER JOIN specialized spe ON spe.consultant_id = ap.consultant_id ");    
 			ResultSet result 		= stmt.executeQuery();
 
 			while (result.next()) 
 			{
-				Appointment appointment = new Appointment
-						(result.getInt(1), 
-								result.getInt(2), 
-								result.getInt(3), 
-								result.getInt(4), 
-								result.getString(5),
-								result.getString(6), 
-								result.getString(7),
-								result.getString(8));
-				appointmentList.add(appointment);
+				HashMap<String,String> hm = new HashMap<String,String>();  
+				  hm.put("salute",result.getString(1));  
+				  hm.put("consultant",result.getString(2));  
+				  hm.put("day",result.getString(3));  
+				  hm.put("date",result.getString(4));
+				  hm.put("time",result.getString(5));  
+				  hm.put("country",result.getString("country")); 
+				  hm.put("subject",result.getString("subject")); 
+				  
+				  v.add(gson.toJson(hm));
 			} 
 
 		} catch (Exception e) {
@@ -84,15 +89,15 @@ public class AppointmentDao {
 		}
 
 		response.setIs_error(false);
-		response.setResult(gson.toJson(appointmentList));
+		response.setResult(v.toString());
 		return response;
 	}
 	
 	
 	/** 
-	 - List Specific student appointment
+	 - List Specific user appointment
 	 * */
-	public ResposeResult getStudentAppointment() {
+	public ResposeResult getUserAppointment(Integer user_id) {
 		ResultSet result = null;
 		Vector v = new Vector<>();
 		
@@ -100,10 +105,12 @@ public class AppointmentDao {
 
 			con 					= DBConnection.connect();;
 			PreparedStatement stmt 	= con.prepareStatement(
-					"select cons.salute, cons.name, ap.day, ap.date, ap.time, ap.created_at " + 
+					"select cons.salute, cons.name, ap.day, ap.date, ap.time, ap.created_at, spe.country, spe.subject " + 
 					"from appointments ap " + 
 					"INNER JOIN students st ON st.id = ap.student_id " + 
-					"INNER JOIN consultants cons ON cons.id = ap.consultant_id");     
+					"INNER JOIN consultants cons ON cons.id = ap.consultant_id "+
+					"INNER JOIN specialized spe ON spe.consultant_id = ap.consultant_id "+
+					"where ap.user_id = "+user_id);     
 			result 		= stmt.executeQuery();
 
 			while (result.next()) 
@@ -114,6 +121,8 @@ public class AppointmentDao {
 				  hm.put("day",result.getString(3));  
 				  hm.put("date",result.getString(4));
 				  hm.put("time",result.getString(5));  
+				  hm.put("country",result.getString("country")); 
+				  hm.put("subject",result.getString("subject")); 
 				  
 				  v.add(gson.toJson(hm));
 			} 

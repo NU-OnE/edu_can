@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,25 +51,42 @@ public class CounsellorDao {
 	/** 
 	 - List them all 
 	 * */
+	/** 
+	 - List them all 
+	 * */
 	public ResposeResult getAllCounsellors() {
-		List<Counsellor> counsellorList = new ArrayList<Counsellor>();
-		try {
 
-			Connection con = DBConnection.connect();
-			PreparedStatement stmt = con.prepareStatement("select * from consultants");     
-			ResultSet result = stmt.executeQuery();
+		Vector<String> vector = new Vector<>();
+		
+		try {
+			Connection con 			= DBConnection.connect();
+			con 					= DBConnection.connect();;
+			PreparedStatement stmt 	= con.prepareStatement(
+					"SELECT con.salute, con.name, con.contact_no, sp.country, sp.subject, sp.id as sp_id, av.* " + 
+					"FROM specialized sp " + 
+					"INNER JOIN consultants con on con.id = sp.`consultant_id` " + 
+					"INNER JOIN availabillities av on av.consultant_id = sp.`consultant_id`");     
+			ResultSet result 		= stmt.executeQuery();
 
 			while (result.next()) 
 			{
-				Counsellor counsellor = new Counsellor
-						(result.getInt(1), 
-								result.getString(1), 
-								result.getString(2), 
-								result.getString(3), 
-								result.getString(4), 
-								result.getString(5));
-				counsellorList.add(counsellor);
-
+				HashMap<String,String> map = new HashMap<>();
+				
+				map.put("id", result.getString("sp_id"));
+				map.put("salute", result.getString("salute"));
+				map.put("name", result.getString("name"));
+				map.put("country", result.getString("country"));
+				map.put("subject", result.getString("subject"));
+				map.put("contact", result.getString("contact_no"));
+				map.put("sun", result.getString("sun"));
+				map.put("mon", result.getString("mon"));
+				map.put("tue", result.getString("tue"));
+				map.put("wed", result.getString("wed"));
+				map.put("thu", result.getString("thu"));
+				map.put("fri", result.getString("fri"));
+				map.put("sat", result.getString("sat"));
+				
+				vector.add(gson.toJson(map));
 			} 
 
 		} catch (Exception e) {
@@ -77,7 +95,7 @@ public class CounsellorDao {
 		}
 
 		response.setIs_error(false);
-		response.setResult(gson.toJson(counsellorList));
+		response.setResult(gson.toJson(vector));
 		return response;
 	}
 	

@@ -5,6 +5,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -30,19 +31,19 @@ public class AppointmentService {
 	
 	@GET 
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResposeResult getAvailabillities()
+	public ResposeResult getAll()
 	{
 		response  = appointment_dao.getAllAppointments();
 		return response; 
 	}
 	
-//	Get Student appointment
+//	Get User appointment
 	@GET
-	@Path("/student")
+	@Path("/student/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResposeResult studentAppointments()
+	public ResposeResult studentAppointments(@PathParam("id") Integer id)
 	{
-		response  = appointment_dao.getStudentAppointment();
+		response  = appointment_dao.getUserAppointment(id);
 		return response; 
 	}
 }
